@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.TimerTask;
 
 /**
@@ -50,6 +51,13 @@ public class IronGramRestController {
     public Iterable<Photo> getPhotos (HttpSession session){
         String username = (String) session.getAttribute("username");
         User user = users.findFirstByName(username);
+        int viewTime = (int) (new Date().getTime()/1000);
+        Iterable<Photo> photoList= photos.findByRecipient(user);
+        for (Photo p:photoList) {
+            p.setViewTime(viewTime);
+            photos.save(p);
+        }
+
         return photos.findByRecipient(user);
     }
 }
