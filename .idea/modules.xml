@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ironGram.iml" filepath="$PROJECT_DIR$/.idea/modules/ironGram.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ironGram_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ironGram_main.iml" group="ironGram" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ironGram_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ironGram_test.iml" group="ironGram" />
+    </modules>
+  </component>
+</project>
