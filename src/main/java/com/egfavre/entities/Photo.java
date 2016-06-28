@@ -21,13 +21,16 @@ public class Photo {
     @Column(nullable = false)
     String filename;
 
+    Integer viewTime;
+
     public Photo() {
     }
 
-    public Photo(User sender, User recipient, String filename) {
+    public Photo(User sender, User recipient, String filename, Integer viewTime) {
         this.sender = sender;
         this.recipient = recipient;
         this.filename = filename;
+        this.viewTime = viewTime;
     }
 
     public int getId() {
@@ -60,5 +63,13 @@ public class Photo {
 
     public void setFilename(String filename) {
         this.filename = filename;
+    }
+
+    public Integer getViewTime() {
+        return viewTime;
+    }
+
+    public void setViewTime(Integer viewTime) {
+        this.viewTime = viewTime;
     }
 }

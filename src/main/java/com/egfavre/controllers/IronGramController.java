@@ -51,7 +51,7 @@ public class IronGramController {
         FileOutputStream fos = new FileOutputStream(photoFile);
         fos.write(file.getBytes());
 
-        Photo photo = new Photo(sender, rec, photoFile.getName());
+        Photo photo = new Photo(sender, rec, photoFile.getName(), null);
         photos.save(photo);
 
         return "redirect:/";
