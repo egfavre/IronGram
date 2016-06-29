@@ -60,7 +60,10 @@ public class IronGramRestController {
                 photos.save(p);
             }
             else {
-                if (viewTime - firstSetViewTime > 10){
+                if (p.getTimeLimit() == null) {
+                    p.setTimeLimit(10);
+                }
+                if (viewTime - firstSetViewTime > p.getTimeLimit()){
                     photos.delete(p);
                     }
                 }

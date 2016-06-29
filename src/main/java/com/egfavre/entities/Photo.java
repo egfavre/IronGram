@@ -21,15 +21,18 @@ public class Photo {
     @Column(nullable = false)
     String filename;
 
+    Integer timeLimit;
+
     Integer viewTime;
 
     public Photo() {
     }
 
-    public Photo(User sender, User recipient, String filename, Integer viewTime) {
+    public Photo(User sender, User recipient, String filename, Integer timeLimit, Integer viewTime) {
         this.sender = sender;
         this.recipient = recipient;
         this.filename = filename;
+        this.timeLimit = timeLimit;
         this.viewTime = viewTime;
     }
 
@@ -71,5 +74,13 @@ public class Photo {
 
     public void setViewTime(Integer viewTime) {
         this.viewTime = viewTime;
+    }
+
+    public Integer getTimeLimit() {
+        return timeLimit;
+    }
+
+    public void setTimeLimit(Integer timeLimit) {
+        this.timeLimit = timeLimit;
     }
 }
