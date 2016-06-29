@@ -104,4 +104,11 @@ public class IronGramRestController {
             return  users.findFirstByName(username);
         }
     }
+
+    @RequestMapping(path = "/public-photos", method = RequestMethod.GET)
+    public Iterable<Photo> publicPhotos(HttpSession session, String username){
+        User sender = users.findFirstByName(username);
+        return photos.findBySenderAndShow(sender, "show");
+
+    }
 }
