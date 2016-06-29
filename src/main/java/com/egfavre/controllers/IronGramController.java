@@ -43,6 +43,10 @@ public class IronGramController {
         if (sender == null || rec==null){
             throw new Exception("Can't find sender or receiver");
         }
+
+        if (!file.getContentType().startsWith("image")) {
+            throw new Exception("Only images are allowed.");
+        }
         File dir = new File("public/photos");
         dir.mkdirs();
 
