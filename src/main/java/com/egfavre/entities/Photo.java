@@ -25,15 +25,18 @@ public class Photo {
 
     Integer viewTime;
 
+    String show;
+
     public Photo() {
     }
 
-    public Photo(User sender, User recipient, String filename, Integer timeLimit, Integer viewTime) {
+    public Photo(User sender, User recipient, String filename, Integer timeLimit, Integer viewTime, String show) {
         this.sender = sender;
         this.recipient = recipient;
         this.filename = filename;
         this.timeLimit = timeLimit;
         this.viewTime = viewTime;
+        this.show = show;
     }
 
     public int getId() {
@@ -82,5 +85,13 @@ public class Photo {
 
     public void setTimeLimit(Integer timeLimit) {
         this.timeLimit = timeLimit;
+    }
+
+    public String getShow() {
+        return show;
+    }
+
+    public void setShow(String show) {
+        this.show = show;
     }
 }

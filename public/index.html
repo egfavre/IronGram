@@ -1,4 +1,4 @@
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <body>
 
 <div id="notLoggedIn">
@@ -11,6 +11,7 @@
     <form action="/upload" method="post" enctype="multipart/form-data">
     <input type="file" name="file"/>
     <input type="text" name="receiver" placeholder="Receiver name">
+        <label><input type="checkbox" name="show" value="show">Make Public</label>
         <input type="number" name="timeLimit" placeholder="Time limit">
     <button type="submit">Upload</button>
     </form>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimerTask;
 
@@ -48,11 +49,13 @@ public class IronGramRestController {
     }
 
     @RequestMapping(path="/photos", method = RequestMethod.GET)
-    public Iterable<Photo> getPhotos (HttpSession session){
+    public ArrayList<Photo> getPhotos (HttpSession session, String show){
         String username = (String) session.getAttribute("username");
         User user = users.findFirstByName(username);
         int viewTime = (int) (new Date().getTime()/1000);
         Iterable<Photo> photoList= photos.findByRecipient(user);
+        Iterable<Photo> photoPublicList = photos.findByShow("show");
+        ArrayList<Photo> fullList = new ArrayList<>();
         for (Photo p:photoList) {
             Integer firstSetViewTime = p.getViewTime();
             if (firstSetViewTime == null){
@@ -66,9 +69,26 @@ public class IronGramRestController {
                 if (viewTime - firstSetViewTime > p.getTimeLimit()){
                     photos.delete(p);
                     }
+                fullList.add(p);
                 }
 
+            for (Photo pPublic:photoPublicList) {
+                firstSetViewTime = pPublic.getViewTime();
+                if (firstSetViewTime == null){
+                    pPublic.setViewTime(viewTime);
+                    photos.save(pPublic);
+                }
+                else {
+                    if (pPublic.getTimeLimit() == null) {
+                        pPublic.setTimeLimit(10);
+                    }
+                    if (viewTime - firstSetViewTime > pPublic.getTimeLimit()){
+                        photos.delete(pPublic);
+                    }
+                    fullList.add(pPublic);
+                }
             }
-        return photos.findByRecipient(user);
+            }
+        return fullList;
     }
 }
