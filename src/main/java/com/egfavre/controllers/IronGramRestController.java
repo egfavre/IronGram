@@ -85,7 +85,9 @@ public class IronGramRestController {
                     if (viewTime - firstSetViewTime > pPublic.getTimeLimit()){
                         photos.delete(pPublic);
                     }
-                    fullList.add(pPublic);
+                    if (!fullList.contains(pPublic)){
+                        fullList.add(pPublic);
+                    }
                 }
             }
             }
