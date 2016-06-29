@@ -37,6 +37,7 @@ public class IronGramRestController {
         else if (!PasswordStorage.verifyPassword(user.getPassword(), userFromDB.getPassword())){
             throw new Exception("Wrong Password");
         }
+
         session.setAttribute("username", user.getName());
         return user;
     }
@@ -47,22 +48,24 @@ public class IronGramRestController {
     }
 
     @RequestMapping(path="/photos", method = RequestMethod.GET)
-    public Iterable<Photo> getPhotos (HttpSession session) throws InterruptedException {
+    public Iterable<Photo> getPhotos (HttpSession session){
         String username = (String) session.getAttribute("username");
         User user = users.findFirstByName(username);
         int viewTime = (int) (new Date().getTime()/1000);
         Iterable<Photo> photoList= photos.findByRecipient(user);
         for (Photo p:photoList) {
-            int firstViewTime = p.getViewTime();
-            if (p.getViewTime()==null){
-            p.setViewTime(viewTime);
+            Integer firstSetViewTime = p.getViewTime();
+            if (firstSetViewTime == null){
+                p.setViewTime(viewTime);
                 photos.save(p);
             }
-            int timePassed = viewTime - firstViewTime;
-            if (timePassed > 10){
-                photos.delete(p);
+            else {
+                if (viewTime - firstSetViewTime > 10){
+                    photos.delete(p);
+                    }
+                }
+
             }
-        }
         return photos.findByRecipient(user);
     }
 }
